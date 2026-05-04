@@ -1,0 +1,22 @@
+# Pastas de compilação (geradas automaticamente, nunca devem ir para o repositório)
+bin/
+obj/
+
+# Pastas e ficheiros locais do Visual Studio / Visual Studio Code
+.vs/
+.vscode/workspace.json
+.vscode/tasks.json
+.vscode/launch.json
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ficheiros de Log e Cache
+*.log
+*.cache
+*.tmp
+
+# Ficheiros de Sistema Operativo (útil se alguém do teu grupo de 4 pessoas usar Mac)
+.DS_Store
+Thumbs.db
