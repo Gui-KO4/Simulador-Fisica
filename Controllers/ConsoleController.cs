@@ -2,28 +2,33 @@ public class ConosoleController
 {
     public ConsoleView console;
     public ErrorController errorCheck;
+    public List<Project> projects;
     
     public ConosoleController(ConsoleView console, ErrorController errorCheck)
     {
         this.console = console;
         this.errorCheck = errorCheck;
+        projects = new List<Project>();
     }
     public void run()
     {
-        string command = ReadCommand();
-        errorCheck.Error(command);
-        switch(command)
-        {
-            case "RPJ":
+        while(true){
+            string[] commandParts = ReadCommand();
+            errorCheck.Error(commandParts, projects, console);
+            switch(commandParts[0])
+            {
+                case "RPJ":
+                    
+                break;
                 
-            break;
-            
+            }
         }
     }
-    public string ReadCommand()
+    public string[] ReadCommand()
     {
         string command = console.ReadCommand();
-        return command;
+        string[] commandParts = command.Split(' ');
+        return commandParts;
     }
  
 }
