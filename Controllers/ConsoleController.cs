@@ -11,13 +11,11 @@ public class ConosoleController
     public void run()
     {
         string command = ReadCommand();
-        
+        errorCheck.Error(command);
         switch(command)
         {
             case "RPJ":
-                errorCheck.RPJError();
-            break;
-            case default:
+                
             break;
             
         }
@@ -25,10 +23,7 @@ public class ConosoleController
     public string ReadCommand()
     {
         string command = console.ReadCommand();
-        ;
+        return command;
     }
-    public bool CommandValidation(string command)
-    {
-        
-    }
+ 
 }
