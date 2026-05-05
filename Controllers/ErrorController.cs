@@ -255,9 +255,58 @@ public class ErrorController
         }
             break;
         case "SMD":
+        {
+            Project projetoAtivo = null;
+            foreach(Project p in projects)
+            {
+                if(p.state == true) 
+                {
+                    projetoAtivo = p;
+                    break; 
+                }
+            }
+            if (projetoAtivo == null)
+            {
+                console.SMDError(1, commandParts[1]); 
+                return false;
+            }
+            bool found = false;
+            foreach(Particle particle in projetoAtivo.particles)
+                if (commandParts[1] == particle.name)
+                {
+                    found = true;
+                    break;
+                }
+            if (!found)
+            {
+                console.SMDError(2, commandParts[1]);
+                return false;
+            }
+            if (commandParts.Length > 3 || commandParts[0] != "SMD")
+            {
+                console.SMDError(5, commandParts[1]);
+                return false;
+            }
+            if (Convert.ToDouble(commandParts[2]) > Convert.ToDouble(commandParts[3]))
+            {
+                console.SMDError(4, commandParts[1]);
+                return false;
+            }
 
+            if (!double.TryParse(commandParts[2], out double duracaoSimulacao) 
+            || !double.TryParse(commandParts[3], out double passoTemporal))
+            {
+                console.SMDError(3, commandParts[1]);
+                return false;
+            }
+        }
         break;
         case "Exit":
+            if (commandParts.Length != 1 || commandParts[0] != "Exit")
+            {
+                console.ExitError(1);
+                return false;
+            }
         break;
         }
         return true; //remove this later
