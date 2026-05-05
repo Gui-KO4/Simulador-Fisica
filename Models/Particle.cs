@@ -2,15 +2,15 @@
 public class Particle
 {
     public string name;
-    public int posXi;
-    public int posYi;  
-    public int velXi;
-    public int velYi;
-    public int acelXi;
-    public int acelYi;
-    public int mass;
+    public double posXi;
+    public double posYi;  
+    public double velXi;
+    public double velYi;
+    public double acelXi;
+    public double acelYi;
+    public double mass;
     public List<Force> forces;
-    public Particle(string name, int posXi, int posYi, int velXi, int velYi, int acelXi, int acelYi, int mass)
+    public Particle(string name, double posXi, double posYi, double velXi, double velYi, double acelXi, double acelYi, double mass)
     {
         this.name = name;
         this.posXi = posXi;

@@ -6,7 +6,7 @@ public class ErrorController
     {
         
     }
-    public bool Error(string[] commandParts, List<Project> projects, ConsoleView console)
+    public bool Error(string[] commandParts, List<Project> projects, ErrorView console)
     {
         switch(commandParts[0]){
         case "RPJ":
