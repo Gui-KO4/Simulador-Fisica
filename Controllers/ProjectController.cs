@@ -8,5 +8,4 @@ public class ProjectController
     Dictionary<string, Project> projects = new Dictionary<string, Project>();
     Project ActiveProject;
 
-
 }

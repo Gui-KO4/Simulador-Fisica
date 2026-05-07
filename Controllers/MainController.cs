@@ -1,28 +1,19 @@
-public class CLI
+public class MainController
 {
     private SimulationController simulationController;
     private ProjectController projectController;
     private ParticleController particleController;
 
-    public CLI()
+    public MainController()
     {
         simulationController = new SimulationController();
         projectController = new ProjectController();
         particleController = new ParticleController();
     }
-    
-  public void Run()
+
+    public void SwitchController(String[] parts)
     {
-
-        while (true)
-        {
-            string [] parts = Console.ReadLine().Split(' ');
-
-            if (parts.Length == 0) {
-                continue;
-            }
-
-            switch (parts[0])
+        switch (parts[0])
             {
                 case "RPJ":
                     break;
@@ -48,6 +39,5 @@ public class CLI
                     OutputView.InvalidInstruction(); 
                     break;
             }
-        }
     }
 }
