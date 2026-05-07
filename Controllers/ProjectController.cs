@@ -38,16 +38,32 @@ public class ProjectController
     {
         if (!projects.ContainsKey(name))
         {
-            OutputView.SelectProject(name, false, projects[name].state);
+            OutputView.SelectProject(name, false, false);
             return;
         }
-        if (ActiveProject != null && ActiveProject.name == name)
+        else if (ActiveProject != null && ActiveProject.name == name)
         {
             OutputView.SelectProject(name, true, projects[name].state);
             return;
         }
-        ActiveProject = projects[name];
-        OutputView.SelectProject(name, true, false);
+        else if(ActiveProject != null && ActiveProject.name != name)
+        {
+            //Desativa o projeto ativo
+            ActiveProject.state = false;
+
+            //Ativa o novo projeto
+            OutputView.SelectProject(name, true, projects[name].state);
+            ActiveProject = projects[name];
+            ActiveProject.state = true;
+
+        }
+        else if (ActiveProject == null)
+        {
+            OutputView.SelectProject(name, true, projects[name].state);
+            ActiveProject = projects[name];
+            ActiveProject.state = true;
+        }
+        
     }
 
 
