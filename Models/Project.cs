@@ -14,4 +14,9 @@ public class Project
         particles = new SortedDictionary<string, Particle>();
     }
 
+    public string currentState()
+    {
+        return state ? "Ativo" : "Inativo";
+    }
+
 }

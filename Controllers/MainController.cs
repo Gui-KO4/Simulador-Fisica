@@ -11,15 +11,33 @@ public class MainController
         particleController = new ParticleController();
     }
 
-    public void SwitchController(String[] parts)
+    public void SwitchController(string[] parts)
     {
         switch (parts[0])
             {
                 case "RPJ":
+                        if (parts.Length != 2)
+                        {
+                            OutputView.InvalidSintax(parts);
+                            return;
+                        }
+                        projectController.RegisterProject(parts[1]);
                     break;
                 case "LPJ":
+                    if (parts.Length != 1)
+                    {
+                        OutputView.InvalidSintax(parts);
+                        return;
+                    }
+                    projectController.ListProjects();
                     break;
                 case "SPJ":
+                    if (parts.Length != 2)
+                    {
+                        OutputView.InvalidSintax(parts);
+                        return;
+                    }
+                    projectController.SelectProject(parts[1]);
                     break;
                 case "RP":   
                     break;
@@ -34,9 +52,10 @@ public class MainController
                 case "SMD":
                     break;
                 case "Exit":
+                    
                     return;
                 default:     
-                    OutputView.InvalidInstruction(); 
+                    OutputView.InvalidSintax(parts); 
                     break;
             }
     }
