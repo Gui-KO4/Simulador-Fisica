@@ -45,7 +45,7 @@ public class MainController
                         OutputView.InvalidSintax(parts);
                         return;
                     }
-                    projectController.RegisterParticle(parts[1],parts[2],parts[3],parts[4],parts[5],parts[6],parts[7],parts[8]);   
+                    particleController.RegisterParticle(parts[1],parts[2],parts[3],parts[4],parts[5],parts[6],parts[7],parts[8]);   
                     break;
                 case "RF":
                     if(parts.Length != 4)
@@ -53,7 +53,7 @@ public class MainController
                         OutputView.InvalidSintax(parts);
                         return;   
                     }
-                    projectController.RegisterForce(parts[1], parts[2], parts[3]);
+                    particleController.RegisterForce(parts[1], parts[2], parts[3]);
                     break;
                 case "LP":
                     if(parts.Length != 1)
@@ -61,7 +61,7 @@ public class MainController
                         OutputView.InvalidSintax(parts);
                         return;   
                     }
-                    projectController.ListParticles();
+                    particleController.ListParticles();
                     break;
                 case "TG":
                     if(parts.Length != 2)
