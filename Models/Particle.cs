@@ -22,4 +22,9 @@ public class Particle
         this.mass = mass;
         forces = new List<Force>();
     }
+
+    public override string ToString()
+    {
+        return $"Partícula: {name} \nPosição inicial: ({initialPositionX},{initialPositionY})m \nVelocidade inicial: ({initialVelocityX}{initialVelocityY}) m/s \nAcelaração: ({accelerationX}{accelerationY}) m/s^2 \nMassa: {mass} kg \nNúmero de forças aplicadas: {forces.Count()}";
+    }
 }

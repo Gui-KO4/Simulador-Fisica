@@ -39,13 +39,37 @@ public class MainController
                     }
                     projectController.SelectProject(parts[1]);
                     break;
-                case "RP":   
+                case "RP":
+                    if(parts.Length != 9)
+                    {
+                        OutputView.InvalidSintax(parts);
+                        return;
+                    }
+                    projectController.RegisterParticle(parts[1],parts[2],parts[3],parts[4],parts[5],parts[6],parts[7],parts[8]);   
                     break;
                 case "RF":
+                    if(parts.Length != 4)
+                    {
+                        OutputView.InvalidSintax(parts);
+                        return;   
+                    }
+                    projectController.RegisterForce(parts[1], parts[2], parts[3]);
                     break;
                 case "LP":
+                    if(parts.Length != 1)
+                    {
+                        OutputView.InvalidSintax(parts);
+                        return;   
+                    }
+                    projectController.ListParticles();
                     break;
-                case "TG": 
+                case "TG":
+                    if(parts.Length != 2)
+                    {
+                        OutputView.InvalidSintax(parts);
+                        return;
+                    } 
+                    projectController.ToggleGravity(parts[1]);
                     break;
                 case "SMC":
                     break;
