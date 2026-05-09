@@ -1,0 +1,1 @@
+// Nos temos que colocar tudo relacionado a Matematica/Fisica aqui sem dar print (Aka sem usar texto).

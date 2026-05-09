@@ -1,0 +1,161 @@
+public static class OutputView
+{
+    // Generic output for invalid instructions based on its type
+    public static void InvalidSintax(string[] parts)
+    {
+        switch(parts[0])
+        {
+            case "RPJ":
+                Console.WriteLine("Comando inválido. Sintaxe correta: RPJ <NomeProjeto>.");
+                break;
+            case "LPJ":
+                Console.WriteLine("Comando inválido: Sintaxe correta: LPJ");
+                break;
+            case "SPJ":
+                Console.WriteLine("Comando inválido: Sintaxe correta: SPJ <NomeProjeto>.");
+                break;
+            case "RP":
+                Console.WriteLine("Comando inválido: Sintaxe correta: RP NomeParticula PosicaoInicialX PosicaoInicialY VelocidadeInicialX VelocidadeInicialY AceleracaoX AceleracaoY Massa");
+                break;
+            case "RF":
+                Console.WriteLine("Comando inválido: Sintaxe Correta: RF NomeParticula ForcaX ForcaY");
+                break;
+            case "LP":
+                Console.WriteLine("Comando inválido: Sintaxe Correta: LP");
+                break;
+            case "TG":
+                Console.WriteLine("Comando inválido: Sintaxe Correta: TG ON ou TG OFF");
+                break;
+            default:
+                Console.WriteLine("Instrução inválida.");
+                break;
+        }
+    }
+
+    //Related Text to commands to Project
+    public static void ProjectRegistered(bool sucess, string projectName)
+    {
+        if(sucess)
+        {
+            Console.WriteLine("Projeto registado com sucesso.");
+        }
+        else
+        {
+            Console.WriteLine($"Já existe um projeto registado com o nome {projectName}.");
+        }
+    }
+
+    public static void ListProject(string projectName, string state)
+    {
+        if(projectName == null)
+        {
+            Console.WriteLine("Nenhum projeto registado.");
+            return;
+        }
+        else
+        {
+            Console.WriteLine($"{projectName} | Estado: {state}");
+        }
+    }
+
+    public static void SelectProject(string projectName,bool found, bool state)
+    {
+        if(found && state == false)
+        {
+            Console.WriteLine($"Projeto {projectName} selecionado com sucesso.");
+        }
+        else if(found && state == true)
+        {
+            Console.WriteLine($"Projeto {projectName} já se encontra selecionado.");
+        }
+        else
+        {
+            Console.WriteLine($"Projeto {projectName} não encontrado.");
+        }
+    }
+
+    public static void RegisterParticle(string particleName, bool selectedProject , bool found, bool invalidMass, bool invalidNumbers)
+    {
+
+        if (!selectedProject)
+        {
+            Console.WriteLine("Nenhum projeto selecionado.");
+        }
+        else if(!found)
+        {
+            Console.WriteLine($"Já existe uma particula neste projeto chamada {particleName}");
+        }
+        else if(!invalidNumbers)
+        {
+            Console.WriteLine("Parâmetros numéricos inválidos.");
+        }
+        else if (!invalidMass)
+        {
+            Console.WriteLine("Mass invalida. O valor da massa deve ser superior a 0");
+        }
+        else
+        {
+            Console.WriteLine($"Partícula {particleName} registada com sucesso.");
+        }
+
+    }
+
+    public static void RegisterForce(string particleName, bool selectedProject, bool selectedParticle, bool invalidNumbers)
+    {
+        if(!selectedProject)
+        {
+            Console.WriteLine("Nenhum projeto selecionado.");
+        }   
+        else if(!selectedParticle)
+        {
+            Console.WriteLine($"Particula {particleName} não encontrada.");
+        }
+        else if(!invalidNumbers)
+        {
+            Console.WriteLine("Parâmetros numéricos inválidos.");
+        }
+        else
+        {
+            Console.WriteLine($"Força registada na partícula: {particleName}");
+        }
+    }
+
+    public static void ListParticles(SortedDictionary<string, Particle> particles,bool selectedProject, bool noParticles)
+    {
+        if (!selectedProject)
+        {
+            Console.WriteLine("Nenhum projeto selecionado.");
+        }   
+        else if (!noParticles)
+        {
+            Console.WriteLine("Não existem partículas registadas no projeto atual.");
+        } 
+        else
+        {
+            Console.WriteLine("Lista de partículas do projeto atualmente selecionado:");
+                foreach(KeyValuePair<string,Particle> particle in particles)
+                {
+                    Console.WriteLine(particle);   
+                }
+        }    
+    }
+
+    public static void ToggleGravity(bool selectedProject, bool gravity)
+    {
+        if (!selectedProject)
+        {
+            Console.WriteLine("Nenhum projeto selecionado");
+        }
+        else if(gravity)
+        {
+            Console.WriteLine("Gravidade ativada (g = 9.80 m/s^2).");
+        }
+        else
+        {
+            Console.WriteLine("Gradidade desativada.");
+        }
+    }
+    // Related Text to commands to particles
+
+
+}
