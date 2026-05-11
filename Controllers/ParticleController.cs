@@ -5,8 +5,13 @@
 
 public class ParticleController
 {
-    ProjectController projectController = new ProjectController();
+    private ProjectController projectController;
     Project ActiveProject;
+
+    public ParticleController(ProjectController sharedProjectController)
+    {
+        projectController = sharedProjectController;
+    }
     
     
     public void RegisterParticle( string particleName, string initialPositionX, string initialPositionY, string initialVelocityX, string initialVelocityY, string accelerationX, string accelerationY, string mass)
@@ -106,6 +111,23 @@ public class ParticleController
             OutputView.ListParticles(ActiveProject.particles, true, true);
             return;
         }
+    }
+
+        public void ToggleGravity(string state)
+    {
+        if(ActiveProject == null)
+        {
+            OutputView.ToggleGravity(false, false);
+            return;
+        }
+        else if(state == "OFF")
+        {
+            OutputView.ToggleGravity(true, false);
+            ActiveProject.gravity = false;
+            return;
+        }
+            OutputView.ToggleGravity(true, true);   
+            ActiveProject.gravity = true;
     }
 
 

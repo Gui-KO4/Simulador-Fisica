@@ -8,7 +8,7 @@ public class MainController
     {
         simulationController = new SimulationController();
         projectController = new ProjectController();
-        particleController = new ParticleController();
+        particleController = new ParticleController(projectController);
     }
 
     public void SwitchController(string[] parts)
@@ -69,14 +69,13 @@ public class MainController
                         OutputView.InvalidSintax(parts);
                         return;
                     } 
-                    projectController.ToggleGravity(parts[1]);
+                    particleController.ToggleGravity(parts[1]);
                     break;
                 case "SMC":
                     break;
                 case "SMD":
                     break;
                 case "Exit":
-                    
                     return;
                 default:     
                     OutputView.InvalidSintax(parts); 

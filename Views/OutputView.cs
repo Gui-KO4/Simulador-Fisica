@@ -74,6 +74,8 @@ public static class OutputView
         }
     }
 
+    // Related Text to commands to particles
+
     public static void RegisterParticle(string particleName, bool selectedProject , bool found, bool invalidMass, bool invalidNumbers)
     {
 
@@ -155,7 +157,6 @@ public static class OutputView
             Console.WriteLine("Gradidade desativada.");
         }
     }
-    // Related Text to commands to particles
 
 
 }
