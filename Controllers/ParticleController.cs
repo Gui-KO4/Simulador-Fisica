@@ -35,21 +35,21 @@ public class ParticleController
             OutputView.RegisterParticle(particleName,true, false, false, false);
             return;    
         }
-        else if(double.TryParse(mass, out massValue) && massValue >= 0)
+        else if(!double.TryParse(mass, out massValue) && massValue >= 0)
         {
             OutputView.RegisterParticle(particleName,true, true, false, false);
             return;
         }
-        else if(double.TryParse(initialPositionX, out initialPositionXValue) 
-                && double.TryParse(initialPositionY, out initialPositionYValue)
-                && double.TryParse(initialVelocityX, out initialVelocityXValue)
-                && double.TryParse(initialVelocityY, out initialVelocityYValue)
-                && double.TryParse(accelerationX, out accelerationXValue)
-                && double.TryParse(accelerationY, out accelerationYValue))
+        else if(!double.TryParse(initialPositionX, out initialPositionXValue) 
+                || !double.TryParse(initialPositionY, out initialPositionYValue) 
+                || !double.TryParse(initialVelocityX, out initialVelocityXValue) 
+                || !double.TryParse(initialVelocityY, out initialVelocityYValue) 
+                || !double.TryParse(accelerationX, out accelerationXValue)
+                || !double.TryParse(accelerationY, out accelerationYValue))
         {
             OutputView.RegisterParticle(particleName,true, true, true, false);
             return;
-        }
+        }else{
         double.TryParse(initialPositionX, out initialPositionXValue); 
         double.TryParse(initialPositionY, out initialPositionYValue);
         double.TryParse(initialVelocityX, out initialVelocityXValue);
@@ -60,7 +60,8 @@ public class ParticleController
 
         Particle particle = new Particle(particleName, initialPositionXValue, initialPositionYValue, initialVelocityXValue, initialVelocityYValue, accelerationXValue, accelerationYValue, massValue);      
         ActiveProject.particles.Add(particleName, particle);
-        OutputView.RegisterParticle(particleName,true, true, true, false);
+        OutputView.RegisterParticle(particleName,true, true, true, true);
+        }
     }
 
     public void RegisterForce(string particleName, string forceX, string forceY)
@@ -80,7 +81,7 @@ public class ParticleController
             OutputView.RegisterForce(particleName, true, false, false);
             return;
         }
-        else if(double.TryParse(forceX, out forceXValue) && double.TryParse(forceY, out forceYValue))
+        else if(!double.TryParse(forceX, out forceXValue) && !double.TryParse(forceY, out forceYValue))
         {
             OutputView.RegisterForce(particleName, true, true, false);
             return;
