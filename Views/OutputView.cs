@@ -159,4 +159,67 @@ public static class OutputView
     }
 
 
+        public static void SimulationSummary(double duration, double step, int iterations, string target = null)
+    {
+        Console.WriteLine($"Tempo total: {duration:F2}s");
+        Console.WriteLine($"Passo: {step:F2}s");
+        Console.WriteLine($"Número de iterações: {iterations}");
+        if (target != null) 
+        {
+            Console.WriteLine($"Partícula: {target}");
+        }
+    }
+
+    public static void SimulationTime(double t)
+    {
+        Console.WriteLine("\n==================================================");
+        Console.WriteLine($"INSTANTE DE TEMPO: {t:F2} s");
+        Console.WriteLine("==================================================");
+    }
+
+    public static void SimulationParticle(string name, double px, double py, double vx, double vy, double ax, double ay, bool isKinematic, double distTotal = 0, double distIntervalo = 0, Force fRes = null)
+    {
+        if (isKinematic) 
+        {
+            Console.WriteLine($"\nPartícula: {name}");
+        }
+        if (!isKinematic && fRes != null)
+        {
+            Console.WriteLine($"\nPosição: ({px:F2}, {py:F2}) m | módulo = {PhysicEngine.GetMagnitude(px, py):F2} m | ângulo = {PhysicEngine.AngleInDegrees(px, py):F2} graus");
+            Console.WriteLine($"Velocidade: ({vx:F2}, {vy:F2}) m/s | módulo = {PhysicEngine.GetMagnitude(vx, vy):F2} m/s | ângulo = {PhysicEngine.AngleInDegrees(vx, vy):F2} graus");
+            Console.WriteLine($"Aceleração: ({ax:F2}, {ay:F2}) m/s^2 | módulo = {PhysicEngine.GetMagnitude(ax, ay):F2} m/s^2 | ângulo = {PhysicEngine.AngleInDegrees(ax, ay):F2} graus");
+            Console.WriteLine($"Força resultante: ({fRes.X:F2}, {fRes.Y:F2}) N | módulo = {PhysicEngine.GetMagnitude(fRes.X, fRes.Y):F2} N | ângulo = {PhysicEngine.AngleInDegrees(fRes.X, fRes.Y):F2} graus");
+        }
+        else
+        {
+            Console.WriteLine($"Posição: ({px:F2}, {py:F2}) m | módulo = {PhysicEngine.GetMagnitude(px, py):F2} m | ângulo = {PhysicEngine.AngleInDegrees(px, py):F2} graus");
+            Console.WriteLine($"Velocidade: ({vx:F2}, {vy:F2}) m/s | módulo = {PhysicEngine.GetMagnitude(vx, vy):F2} m/s | ângulo = {PhysicEngine.AngleInDegrees(vx, vy):F2} graus");
+            Console.WriteLine($"Aceleração: ({ax:F2}, {ay:F2}) m/s^2 | módulo = {PhysicEngine.GetMagnitude(ax, ay):F2} m/s^2 | ângulo = {PhysicEngine.AngleInDegrees(ax, ay):F2} graus");
+            Console.WriteLine($"Distância percorrida: {distTotal:F2} m");
+            Console.WriteLine($"Distância percorrida no intervalo de tempo: {distIntervalo:F2} m");
+            Console.WriteLine("\n------------------------------------------------");
+        }
+    }
+
+    public static bool ValidateTime(Project proj, string dStr, string sStr, out double d, out double s)
+    {
+        d = s = 0;
+        if (proj == null) 
+        { 
+            Console.WriteLine("Nenhum projeto selecionado."); return false;
+        }
+        if (!double.TryParse(dStr, out d) || !double.TryParse(sStr, out s) || d <= 0 || s <= 0) 
+        {
+            Console.WriteLine("O valor da duração da simulação ou do passo temporal inválido.");
+            return false;
+        }
+        if (s > d) 
+        {
+            Console.WriteLine("Passo invalido. O passo não pode ser superior ao tempo total.");
+            return false;
+        }
+        return true;
+    }
+
+
 }

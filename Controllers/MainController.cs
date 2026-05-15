@@ -6,8 +6,8 @@ public class MainController
 
     public MainController()
     {
-        simulationController = new SimulationController();
         projectController = new ProjectController();
+        simulationController = new SimulationController(projectController);
         particleController = new ParticleController(projectController);
     }
 
@@ -72,8 +72,20 @@ public class MainController
                     particleController.ToggleGravity(parts[1]);
                     break;
                 case "SMC":
+                    if(parts.Length != 3)
+                        {
+                            OutputView.InvalidSintax(parts);
+                            return;
+                        }
+                        simulationController.SMC(parts[1], parts[2]);
                     break;
                 case "SMD":
+                    if(parts.Length != 4)
+                    {
+                        OutputView.InvalidSintax(parts);
+                        return;
+                    }
+                    simulationController.SMD(parts[1], parts[2], parts[3]);
                     break;
                 case "Exit":
                     return;
