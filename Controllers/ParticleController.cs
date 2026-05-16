@@ -113,25 +113,5 @@ public class ParticleController
             return;
         }
     }
-
-        public void ToggleGravity(string state)
-    {
-        if(ActiveProject == null)
-        {
-            OutputView.ToggleGravity(false, false);
-            return;
-        }
-        else if(state == "OFF")
-        {
-            OutputView.ToggleGravity(true, false);
-            ActiveProject.gravity = false;
-            return;
-        }
-            OutputView.ToggleGravity(true, true);   
-            ActiveProject.gravity = true;
-    }
-
-
-
-    
+   
 }

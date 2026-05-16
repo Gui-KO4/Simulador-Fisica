@@ -69,7 +69,7 @@ public class MainController
                         OutputView.InvalidSintax(parts);
                         return;
                     } 
-                    particleController.ToggleGravity(parts[1]);
+                    projectController.ToggleGravity(parts[1]);
                     break;
                 case "SMC":
                     if(parts.Length != 3)
