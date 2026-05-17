@@ -37,6 +37,9 @@ public class SimulationTests
         TestRegisterProjectAlreadyExists();
         TestListProjects();
         TestListProjectsEmpty();
+        SelectProjectSelectnNewProject();
+        SelectProjectAlreadySelected();
+        SelectProjectNotFound();
 
         // Força um Teste a falhar (Para demonstrar que o Metodo de Assert funciona corretamente)
         TestForceFailedAssert();
@@ -80,6 +83,25 @@ public class SimulationTests
     public bool TestForceFailedAssert()
     {
         return Assert(false);
+    }
+
+        public bool SelectProjectSelectnNewProject()
+    {
+        projectController.SelectProject("Project1");
+        return Assert(projectController.GetActiveProject() != null);
+    }
+
+    public bool SelectProjectAlreadySelected()
+    {
+        projectController.SelectProject("Project1");
+        return Assert(projectController.GetActiveProject() != null);
+    }
+
+    public bool SelectProjectNotFound()
+    {
+        ProjectController sPNotFound = new ProjectController();
+        sPNotFound.SelectProject("Project1");
+        return Assert(sPNotFound.GetActiveProject() == null);
     }
 
     // Tests of Simulation Controller
