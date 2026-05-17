@@ -77,7 +77,7 @@ public class ProjectController
             OutputView.ToggleGravity(true, true);   
             ActiveProject.gravity = true;
         }else{
-        OutputView.InvalidSintax(parts);
+            OutputView.InvalidSintax(parts);
         }
     }
 
@@ -86,7 +86,7 @@ public class ProjectController
         return ActiveProject;
     }
 
-    // Helper Methods for Tests
+    // Helper Methods para os testes
     public Project GetProject(string name)
     {
         if (projects.ContainsKey(name))

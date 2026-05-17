@@ -77,7 +77,7 @@ public class MainController
                             OutputView.InvalidSintax(parts);
                             return;
                         }
-                        simulationController.SMC(parts[1], parts[2]);
+                    simulationController.SMC(parts[1], parts[2]);
                     break;
                 case "SMD":
                     if(parts.Length != 4)
