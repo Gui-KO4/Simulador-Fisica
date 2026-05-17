@@ -87,6 +87,10 @@ public class MainController
                     }
                     simulationController.SMD(parts[1], parts[2], parts[3]);
                     break;
+                case "TEST":
+                    SimulationTests tests = new SimulationTests(projectController, particleController);
+                    tests.ExecuteTests();
+                    break;
                 case "Exit":
                     return;
                 default:     
