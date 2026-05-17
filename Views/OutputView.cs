@@ -1,6 +1,6 @@
 public static class OutputView
 {
-    // Generic output for invalid instructions based on its type
+    // Texto generico relacionado com erros de sintaxe e comandos invalidos ou de saida do programa
     public static void InvalidSintax(string[] parts)
     {
         switch(parts[0])
@@ -41,7 +41,12 @@ public static class OutputView
         }
     }
 
-    //Related Text to commands to Project
+    public static void ExitSuccess()
+    {
+        Console.WriteLine("Programa terminado com sucesso!");
+    }
+
+    // Texto relacionado com comandos de projeto
     public static void ProjectRegistered(bool sucess, string projectName)
     {
         if(sucess)
@@ -87,7 +92,23 @@ public static class OutputView
         }
     }
 
-    // Related Text to commands to particles
+    public static void ToggleGravity(bool selectedProject, bool gravity)
+    {
+        if (!selectedProject)
+        {
+            Console.WriteLine("Nenhum projeto selecionado");
+        }
+        else if(gravity)
+        {
+            Console.WriteLine("Gravidade ativada (g = 9.80 m/s^2).");
+        }
+        else
+        {
+            Console.WriteLine("Gradidade desativada.");
+        }
+    }
+
+    // Texto relacionado com comandos de partículas
 
     public static void RegisterParticle(string particleName, bool selectedProject , bool found, bool invalidMass, bool invalidNumbers)
     {
@@ -155,23 +176,7 @@ public static class OutputView
         }    
     }
 
-    public static void ToggleGravity(bool selectedProject, bool gravity)
-    {
-        if (!selectedProject)
-        {
-            Console.WriteLine("Nenhum projeto selecionado");
-        }
-        else if(gravity)
-        {
-            Console.WriteLine("Gravidade ativada (g = 9.80 m/s^2).");
-        }
-        else
-        {
-            Console.WriteLine("Gradidade desativada.");
-        }
-    }
-
-    // Related Text to commands to Simulation
+    // Texto relacionado com comandos de simulação
 
 
         public static void SimulationSummary(double duration, double step, int iterations, string target = null)
@@ -292,9 +297,4 @@ public static class OutputView
         return true;
     }
     
-
-    public static void ExitSuccess()
-    {
-        Console.WriteLine("Programa terminado com sucesso!");
-    }
 }

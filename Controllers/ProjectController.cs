@@ -86,7 +86,7 @@ public class ProjectController
         return ActiveProject;
     }
 
-    // Helper Methods for Tests
+    // Helper Methods para os testes
     public Project GetProject(string name)
     {
         if (projects.ContainsKey(name))

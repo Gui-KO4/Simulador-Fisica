@@ -49,7 +49,7 @@
 >## Testes Unitarios
 >>Para os testes unitarios fizemos uma abordagem diferente, em vez de usar um Library de testes como o NUnit ou xUnit, optamos por criar as nossas proprias funções para testar a funcionalidade do programa. Pois quando testamos usar as libraries mencionadas, tivemos problemas com a execução dos testes, além de adicionar a necessidade de instalar os packages e configurar o ambiente de testes, o que poderia ser um problema para a professora correr os testes.
 >>>### Como correr os testes
->>>Correr o Programa normalmente, e como comando usar "Test" para correr todos os testes ou "Test [Nome do Teste]" para correr um teste específico.
+>>>Correr o Programa normalmente, e colocar o comando "Test" para correr todos os testes ou "Test [Nome do Teste]" para correr um teste específico.
 >>>O Nome do teste é o nome do metodo de teste.
 >>>>Nota: Tentamos manter os nomes dos metodos de teste o mais descritivo possível para facilitar a identificação e o que fazem.
 

@@ -17,7 +17,6 @@ public class SimulationController
         {
             return;
         }
-        // Realiza todas as validações centralizadas no OutputView
         if (!OutputView.SimulationCinematic(active))
         {
             return; 
@@ -49,7 +48,7 @@ public class SimulationController
     private void Simulation(Project proj, string target, double duration, double step, bool isKinematic)
         {
             int iteracoes = Convert.ToInt32(duration / step);
-            // Utiliza OutputView em vez de SimulationView
+            
             OutputView.SimulationSummary(duration, step, iteracoes, target);
 
             for (double t = 0; t <= duration; t = Math.Round(t + step, 2))
