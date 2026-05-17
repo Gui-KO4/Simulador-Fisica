@@ -155,6 +155,12 @@ Correr o programa normalmente e utilizar um dos seguintes comandos:
 | `List`              | Para as forças usamos uma List, pois nos não vimos necessidade de acessar as forças individualmente, pois as forças são usadas em conjunto. |
 
 ---
+## Membros do Grupo: 
+- Leandro Santos 20252147
+- Henrique Carvalho 20250852
+- Guilherme Soares 20252152
+- Henrique Metelo 20252138
+---
 
 ## Nota sobre README
 
