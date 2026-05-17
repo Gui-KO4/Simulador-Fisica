@@ -100,7 +100,7 @@ public class SimulationTests
     public bool SelectProjectNotFound()
     {
         ProjectController sPNotFound = new ProjectController();
-        sPNotFound.SelectProject("Project1");
+        sPNotFound.SelectProject("Project2");
         return Assert(sPNotFound.GetActiveProject() == null);
     }
 
