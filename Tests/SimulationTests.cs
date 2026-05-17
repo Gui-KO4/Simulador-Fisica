@@ -11,6 +11,7 @@ public class SimulationTests
 
 
     // Assert Method 
+    // Fizemos desta forma porque a Library xUnit estava  a dar erros de Setup durante a execução
     public bool Assert(bool condition)
     {
         if (!condition)

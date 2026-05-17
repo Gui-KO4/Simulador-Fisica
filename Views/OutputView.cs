@@ -165,6 +165,8 @@ public static class OutputView
         }
     }
 
+    // Related Text to commands to Simulation
+
 
         public static void SimulationSummary(double duration, double step, int iterations, string target = null)
     {
