@@ -26,6 +26,9 @@ public static class OutputView
             case "TG":
                 Console.WriteLine("Comando inválido: Sintaxe Correta: TG ON ou TG OFF");
                 break;
+            case "Exit":
+                Console.WriteLine("Comando inválido: Sintaxe Correta: Exit");
+                break;
             default:
                 Console.WriteLine("Instrução inválida.");
                 break;
@@ -57,6 +60,10 @@ public static class OutputView
             Console.WriteLine($"{projectName} | Estado: {state}");
         }
     }
+    public static void ListProjectHeader()
+    {
+        Console.WriteLine("Lista de projetos: \n");
+    }
 
     public static void SelectProject(string projectName,bool found, bool state)
     {
@@ -87,13 +94,13 @@ public static class OutputView
         {
             Console.WriteLine($"Já existe uma particula neste projeto chamada {particleName}");
         }
-        else if(!invalidNumbers)
-        {
-            Console.WriteLine("Parâmetros numéricos inválidos.");
-        }
         else if (!invalidMass)
         {
             Console.WriteLine("Mass invalida. O valor da massa deve ser superior a 0");
+        }
+        else if(!invalidNumbers)
+        {
+            Console.WriteLine("Parâmetros numéricos inválidos.");
         }
         else
         {
@@ -135,7 +142,7 @@ public static class OutputView
         else
         {
             Console.WriteLine("Lista de partículas do projeto atualmente selecionado:");
-                foreach(KeyValuePair<string,Particle> particle in particles)
+                foreach(Particle particle in particles.Values)
                 {
                     Console.WriteLine(particle);   
                 }

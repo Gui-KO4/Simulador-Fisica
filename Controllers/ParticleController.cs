@@ -30,7 +30,7 @@ public class ParticleController
             OutputView.RegisterParticle(particleName,true, false, false, false);
             return;    
         }
-        else if(!double.TryParse(mass, out massValue) && massValue >= 0)
+        else if(!double.TryParse(mass, out massValue) || massValue < 0)
         {
             OutputView.RegisterParticle(particleName,true, true, false, false);
             return;
@@ -76,7 +76,7 @@ public class ParticleController
             OutputView.RegisterForce(particleName, true, false, false);
             return;
         }
-        else if(!double.TryParse(forceX, out forceXValue) && !double.TryParse(forceY, out forceYValue))
+        else if(!double.TryParse(forceX, out forceXValue) || !double.TryParse(forceY, out forceYValue))
         {
             OutputView.RegisterForce(particleName, true, true, false);
             return;
