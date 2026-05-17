@@ -80,7 +80,14 @@ public class SimulationTests
         Console.WriteLine("-------------------  Testes de Simulação-------------------");
         TestSMCSuccess();
         Console.WriteLine(" ");
-
+        TestSBD();
+        Console.WriteLine(" ");
+        TestNegativeTime();
+        Console.WriteLine(" ");
+        TestSMDSuccess();
+        Console.WriteLine(" ");
+        TestSMDError();
+        
 
         // Força um Teste a falhar (Para demonstrar que o Metodo de Assert funciona corretamente)
         Console.WriteLine(" ");
@@ -177,6 +184,22 @@ public class SimulationTests
             case "TestSMCSuccess":
                 Console.WriteLine(" ");
                 TestSMCSuccess();
+                break;
+            case "TestSBD":
+                Console.WriteLine(" ");
+                TestSBD();
+                break;
+            case "TestNegativeTime":
+                Console.WriteLine(" ");
+                TestNegativeTime();
+                break;
+            case "TestSMDSuccess":
+                Console.WriteLine(" ");
+                TestSMDSuccess();
+                break;
+            case "TestSMDError":
+                Console.WriteLine(" ");
+                TestSMDError();
                 break;
             case "TestForceFailedAssert":
                 Console.WriteLine(" ");
@@ -422,39 +445,87 @@ public class SimulationTests
         
         SimulationController smcSimulationController = new SimulationController(smcProjectController);
         smcSimulationController.SMC("10", "5");
-
-        double posicaoFinal = smcProjectController.GetActiveProject().particles["SMC1"].initialPositionX;
-        Console.WriteLine(posicaoFinal);
-
-        return Assert(posicaoInicial == posicaoFinal);
-    }
-
-/*
-    public bool TestSMCInvalidTime()
-    {
-        ProjectController smcProjectControllerIT = new ProjectController();
-        smcProjectControllerIT.RegisterProject("SMCIT");
-        smcProjectControllerIT.SelectProject("SMCIT");
-
-        ParticleController smcParticleControllerIT = new ParticleController(smcProjectControllerIT);
-        smcParticleControllerIT.RegisterParticle("SMCIT", "0", "0", "20", "0", "0", "0", "10");
-
-        double posicaoInicial = smcProjectControllerIT.GetActiveProject().particles["SMCIT"].initialPositionX;
-
-        SimulationController smcSimulationControllerIT = new SimulationController(smcProjectControllerIT);
-
+     
         
+        Project project = smcProjectController.GetActiveProject();
+        Particle particle = project.particles["SMC1"];
+        double posicaoFinalX = smcSimulationController.getLastPositionX();
+        Console.WriteLine(posicaoFinalX);
+
+        return Assert(posicaoInicial == posicaoFinalX);
     }
-/*
+
+    public bool TestSBD() // Steps bigger than Duration(SBD)
+    {
+        ProjectController smcProjectController = new ProjectController();
+        smcProjectController.RegisterProject("SMCProject");
+        smcProjectController.SelectProject("SMCProject");
+
+        ParticleController smcParticleController = new ParticleController(smcProjectController);
+        smcParticleController.RegisterParticle("SMC1", "20", "20", "0", "0", "0", "0", "10");
+        string duration = "5";
+        string steps = "10";
+        SimulationController smcSimulationController = new SimulationController(smcProjectController);
+        smcSimulationController.SMC(duration, steps);
+        return Assert(Convert.ToInt32(steps) > Convert.ToInt32(duration));
+    }
+    
+    public bool TestNegativeTime()
+    {
+        ProjectController smcProjectController = new ProjectController();
+        smcProjectController.RegisterProject("SMCProject");
+        smcProjectController.SelectProject("SMCProject");
+
+        ParticleController smcParticleController = new ParticleController(smcProjectController);
+        smcParticleController.RegisterParticle("SMC1", "20", "20", "0", "0", "0", "0", "10");
+        string duration = "-10";
+        SimulationController smdSimulationController = new SimulationController(smcProjectController);
+        smdSimulationController.SMC(duration, "5");
+
+        return Assert(Convert.ToInt32(duration) < 0);
+    }
+
     public bool TestSMDSuccess()
     {
+        ProjectController smdProjectController = new ProjectController();
+        smdProjectController.RegisterProject("SMDProject");
+        smdProjectController.SelectProject("SMDProject");
+
+        ParticleController smdParticleController = new ParticleController(smdProjectController);
+        smdParticleController.RegisterParticle("SMD1", "20", "20", "0", "0", "0", "0", "10");
+
+        double posicaoInicial = smdProjectController.GetActiveProject().particles["SMD1"].initialPositionX;
+        Console.WriteLine(posicaoInicial);
+        
+        SimulationController smdSimulationController = new SimulationController(smdProjectController);
+        smdSimulationController.SMD("SMD1", "10","5");
+     
+        
+        Project project = smdProjectController.GetActiveProject();
+        Particle particle = project.particles["SMD1"];
+        double posicaoFinalX = smdSimulationController.getLastPositionX();
+        Console.WriteLine(posicaoFinalX);
+
+        return Assert(posicaoInicial == posicaoFinalX);
         
     }
 
-    public bool TestValidationTime()
+    public bool TestSMDError()
     {
+        ProjectController smdProjectController = new ProjectController();
+        smdProjectController.RegisterProject("SMDProject");
+        smdProjectController.SelectProject("SMDProject");
+
+        ParticleController smcParticleController = new ParticleController(smdProjectController);
+        smcParticleController.RegisterParticle("SMD1", "20", "20", "0", "0", "0", "0", "10");
+        string SMD1 = smdProjectController.GetActiveProject().particles["SMD1"].name;
+        string SMD2 = "SMD2";
+        SimulationController smcSimulationController = new SimulationController(smdProjectController);
+        smcSimulationController.SMD(SMD2,"10", "5");
         
+        return Assert(SMD1 != SMD2);  
     }
 
-*/
+
+
 }

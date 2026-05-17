@@ -1,7 +1,8 @@
 public class SimulationController
 {
     private ProjectController projectController;
-
+    public double LastPositionX;
+    public double LastPositionY;
     public SimulationController(ProjectController projectController)
     {
         this.projectController = projectController;
@@ -85,6 +86,11 @@ public class SimulationController
                     double posx = PhysicEngine.CalculatePos(particle.initialPositionX, particle.initialVelocityX, accFinalX, t);
                     double posy = PhysicEngine.CalculatePos(particle.initialPositionY, particle.initialVelocityY, accFinalY, t);
 
+                    if(t == duration)
+                    {
+                        LastPositionX = posx;
+                        LastPositionY = posy;       
+                    }
                     double distIntervalo = 0;
                     if (t > 0)
                     {
@@ -101,5 +107,14 @@ public class SimulationController
                     OutputView.SimulationParticle(particle.name, posx, posy, velx, vely, accMostrarX, accMostrarY, isKinematic, distTotal, distIntervalo, fRes);
             }
         }
+    }
+    //helper methods for tests
+    public double getLastPositionX()
+    {
+        return LastPositionX;
+    }
+    public double getLastPositionY()
+    {
+        return LastPositionY;
     }
 }
