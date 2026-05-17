@@ -34,16 +34,46 @@ public class SimulationTests
         failedTests = 0;
 
         // Chama os metodos de teste
+        Console.WriteLine("------------------- Testes de Projeto-------------------");
         TestRegisterProjectSuccess();
+        Console.WriteLine(" ");
         TestRegisterProjectAlreadyExists();
+        Console.WriteLine(" ");
         TestListProjects();
+        Console.WriteLine(" ");
         TestListProjectsEmpty();
-        SelectProjectSelectnNewProject();
-        SelectProjectAlreadySelected();
-        SelectProjectNotFound();
+        Console.WriteLine(" ");
+        TestSelectProjectSelectnNewProject();
+        Console.WriteLine(" ");
+        TestSelectProjectAlreadySelected();
+        Console.WriteLine(" ");
+        TestSelectProjectNotFound();
+        
+
+        Console.WriteLine("-------------------  Testes de Particula-------------------");
+        TestRegisterParticleSuccess();
+        Console.WriteLine(" ");
+        TestRegisterParticleMassInvalid();
+        Console.WriteLine(" ");
+        TestRegisterParticleInvalidValues();
+        Console.WriteLine(" ");
+        TestRegisterParticleAlreadyExists();
+        Console.WriteLine(" ");
+        TestListParticlesSuceful();
+        Console.WriteLine(" ");
+        TestListParticlesEmpty();
+        Console.WriteLine(" ");
+        TestRegisterForceSucess();
+        Console.WriteLine(" ");
+        TestRegisterForceInvalidValues();
+        Console.WriteLine("-------------------  Testes de Simulação-------------------");
+
+
 
         // Força um Teste a falhar (Para demonstrar que o Metodo de Assert funciona corretamente)
+        Console.WriteLine(" ");
         TestForceFailedAssert();
+        Console.WriteLine(" ");
 
         Console.WriteLine("Resultados dos Testes:");
         Console.WriteLine($"Testes Passados: {passedTests}");
@@ -54,22 +84,28 @@ public class SimulationTests
     }
 
     // Tests of Project Controller
-    ProjectController projectController = new ProjectController();
 
     public bool TestRegisterProjectSuccess()
     {
+        ProjectController projectController = new ProjectController();
         projectController.RegisterProject("Project1");
         return Assert(projectController.GetProject("Project1") != null);
     }
 
     public bool TestRegisterProjectAlreadyExists()
     {
+        ProjectController projectController = new ProjectController();
+        projectController.RegisterProject("Project1");
         projectController.RegisterProject("Project1");
         return Assert(projectController.GetProject("Project1") != null);
     }
 
     public bool TestListProjects()
     {
+        ProjectController projectController = new ProjectController();
+        projectController.RegisterProject("Project1");
+        projectController.RegisterProject("Project2");
+        projectController.SelectProject("Project2");
         projectController.ListProjects();
         return Assert(projectController.GetTotalProjects() > 0);
     }
@@ -86,30 +122,135 @@ public class SimulationTests
         return Assert(false);
     }
 
-        public bool SelectProjectSelectnNewProject()
+        public bool TestSelectProjectSelectnNewProject()
     {
+        ProjectController projectController = new ProjectController();
+        projectController.RegisterProject("Project1");
         projectController.SelectProject("Project1");
         return Assert(projectController.GetActiveProject() != null);
     }
 
-    public bool SelectProjectAlreadySelected()
+    public bool TestSelectProjectAlreadySelected()
     {
+        ProjectController projectController = new ProjectController();
+        projectController.RegisterProject("Project1");
+        projectController.SelectProject("Project1");
+
         projectController.SelectProject("Project1");
         return Assert(projectController.GetActiveProject() != null);
     }
 
-    public bool SelectProjectNotFound()
+    public bool TestSelectProjectNotFound()
     {
         ProjectController sPNotFound = new ProjectController();
         sPNotFound.SelectProject("Project2");
         return Assert(sPNotFound.GetActiveProject() == null);
     }
 
-
-
     // Tests Particle Controller
+
+    public bool TestRegisterParticleSuccess()
+    {
+        ProjectController particleProjectController = new ProjectController();
+        particleProjectController.RegisterProject("Project1");
+        particleProjectController.SelectProject("Project1");
+
+        ParticleController particleController = new ParticleController(particleProjectController);
+        particleController.RegisterParticle("Particle1", "0", "0", "0", "0", "0", "0", "1");
+
+        return Assert(particleProjectController.GetActiveProject().particles.ContainsKey("Particle1"));
+    }
     
-    
+    public bool TestRegisterParticleMassInvalid()
+    {
+        ProjectController particleProjectController = new ProjectController();
+        particleProjectController.RegisterProject("Project1");
+        particleProjectController.SelectProject("Project1");
+
+        ParticleController particleController = new ParticleController(particleProjectController);
+        particleController.RegisterParticle("Particle1", "0", "0", "0", "0", "0", "0", "-1");
+
+        return Assert(!particleProjectController.GetActiveProject().particles.ContainsKey("Particle1"));
+    }
+
+    public bool TestRegisterParticleInvalidValues()
+    {
+        ProjectController particleProjectController = new ProjectController();
+        particleProjectController.RegisterProject("Project1");
+        particleProjectController.SelectProject("Project1");
+
+        ParticleController particleController = new ParticleController(particleProjectController);
+        particleController.RegisterParticle("Particle1", "invalid", "0", "0", "0", "0", "0", "1");
+
+        return Assert(!particleProjectController.GetActiveProject().particles.ContainsKey("Particle1"));
+    }
+
+    public bool TestRegisterParticleAlreadyExists()
+    {
+        ProjectController particleProjectController = new ProjectController();
+        particleProjectController.RegisterProject("Project1");
+        particleProjectController.SelectProject("Project1");
+
+        ParticleController particleController = new ParticleController(particleProjectController);
+        particleController.RegisterParticle("Particle1", "0", "0", "0", "0", "0", "0", "1");
+        particleController.RegisterParticle("Particle1", "0", "0", "0", "0", "0", "0", "1");
+
+        return Assert(particleProjectController.GetActiveProject().particles.ContainsKey("Particle1") && particleProjectController.GetActiveProject().particles.Count == 1);
+    }
+
+    public bool TestListParticlesSuceful()
+    {
+        ProjectController particleProjectController = new ProjectController();
+        particleProjectController.RegisterProject("Project1");
+        particleProjectController.SelectProject("Project1");
+
+        ParticleController particleController = new ParticleController(particleProjectController);
+        particleController.RegisterParticle("Pessoa", "0", "0", "0", "0", "0", "0", "1");
+        particleController.RegisterParticle("Fernando", "0", "0", "0", "0", "0", "0", "1");
+        particleController.RegisterParticle("Antonio", "0", "0", "0", "0", "0", "0", "1");
+
+        particleController.ListParticles();
+
+        return Assert(particleProjectController.GetActiveProject().particles.Count == 3);
+    }
+
+    public bool TestListParticlesEmpty()
+    {
+        ProjectController particleProjectController = new ProjectController();
+        particleProjectController.RegisterProject("Project1");
+        particleProjectController.SelectProject("Project1");
+
+        ParticleController particleController = new ParticleController(particleProjectController);
+        particleController.ListParticles();
+
+        return Assert(particleProjectController.GetActiveProject().particles.Count == 0);
+    }
+
+    public bool TestRegisterForceSucess()
+    {
+        ProjectController particleProjectController = new ProjectController();
+        particleProjectController.RegisterProject("Project1");
+        particleProjectController.SelectProject("Project1");
+
+        ParticleController particleController = new ParticleController(particleProjectController);
+        particleController.RegisterParticle("Particle1", "0", "0", "0", "0", "0", "0", "1");
+        particleController.RegisterForce("Particle1", "10", "0");
+
+        return Assert(particleProjectController.GetActiveProject().particles["Particle1"].forces.Count == 1);
+    }
+
+    public bool TestRegisterForceInvalidValues()
+    {
+        ProjectController particleProjectController = new ProjectController();
+        particleProjectController.RegisterProject("Project1");
+        particleProjectController.SelectProject("Project1");
+
+        ParticleController particleController = new ParticleController(particleProjectController);
+        particleController.RegisterParticle("Particle1", "0", "0", "0", "0", "0", "0", "1");
+        particleController.RegisterForce("Particle1", "invalid", "0");
+
+        return Assert(particleProjectController.GetActiveProject().particles["Particle1"].forces.Count == 0);
+    }
 
     // Tests of Simulation Controller
 
