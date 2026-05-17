@@ -1,25 +1,32 @@
+using System.Data.SqlTypes;
+
 public static class PhysicEngine
 {
     public static Force GetResultantForce(Particle p, bool gravityActive)
     {
-        double tx = 0, ty = 0;
+        double fx = 0;
+        double fy = 0;
         foreach (var f in p.forces) 
         { 
-            tx += f.X; 
-            ty += f.Y; 
+            fx += f.X; 
+            fy += f.Y; 
         }
 
         if (gravityActive) 
         {
-            ty -= (p.mass * 9.80); 
+            fy -= (p.mass * 9.80); 
         }
 
-        return new Force(tx, ty);
+        return new Force(fx, fy);
+    }
+    public static double GetAccelerationX(Force force, double mass) 
+    {
+        return force.X / mass;
     }
 
-    public static (double x, double y) GetAcceleration(Force force, double mass) 
+    public static double GetAccelerationY(Force force, double mass) 
     {
-        return (force.X / mass, force.Y / mass);
+        return force.Y / mass;
     }
 
     public static double CalculatePos(double p0, double v0, double a, double t) 
