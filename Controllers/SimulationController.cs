@@ -108,7 +108,7 @@ public class SimulationController
             }
         }
     }
-    //helper methods for tests
+    //Helper metodos para os testes unitários
     public double getLastPositionX()
     {
         return LastPositionX;
