@@ -10,7 +10,7 @@ public class SimulationController
     // Executa a Simulação Cinemática (SMC) - Todas as partículas
     public void SMC(string durationStr, string stepStr)
     {
-        Project active = this.projectController.GetActiveProject();
+        Project active = projectController.GetActiveProject();
         double duration = Convert.ToDouble(durationStr);
         double step = Convert.ToDouble(stepStr);
         if (!OutputView.ValidateTime(active, duration, step))
@@ -29,7 +29,7 @@ public class SimulationController
     // Executa a Simulação Dinâmica (SMD) - Apenas uma partícula alvo
     public void SMD(string target, string durationStr, string stepStr)
     {
-        Project active = this.projectController.GetActiveProject();
+        Project active = projectController.GetActiveProject();
         double duration = Convert.ToDouble(durationStr);
         double step = Convert.ToDouble(stepStr);
         if (!OutputView.ValidateTime(active, duration, step))

@@ -4,21 +4,25 @@
 >
 >Este projeto consiste na construçao de um simulador de fisica 2D na linha de comando em linguagem C#, Neste simulador é possivel adicionar varios projetos em que cada projeto tera as suas particulas cada uma delas com as suas forças.
 >Tendo adicionado tudo para uma simulaçao é possível simular movimentos(Cinemática) e forças resultantes(Dinâmica)
-
+>
 >## Variaveis e Formulas
 >>### GetResultantForce() -> Calculo da Força Resultante e Peso
 >>Soma as componentes em X e as componentes em Y de todas as forças na particula
 >>Se a gravidade estiver ligada fazemos a alteração no peso
 >>Força resultante = somatorio de todas forças
 >>Py = massa . gravidade
->>Justificação
+>>Estamos a aplicar a 2ª lei de Newton para descobrir a força total aplicada nas particulas no eixo do x e do y
 >
->>### GetAccelaration() -> Segunda Lei de Newton
->>Dividimos a força resultante  em x e y obtida na função anterior e dividimos pela massa para obter a acelaração em x e y
->>ax = Força resultante em X / massa
->>ay = Força resultante em Y / massa
->>Estamos a aplicar a 2ª lei de Newton para descobrir a acelaração para descobrir a alteração na velocidade na simulação
+>>### GetAccelerationX -> Obtem a aceleração no eixo do x
+>>Calcula a acelaração no eixo do x
+>>acelaração = força em X / massa
+>>Estamos a aplicar a 2ª lei de Newton para descobrir a acelaração para descobrir a alteração na velocidade na simulação no eixo do x
 >
+>>### GetAccelerationX -> Obtem a aceleração no eixo do y
+>>Calcula a acelaração no eixo do y
+>>acelaração = força em y / massa
+>>Estamos a aplicar a 2ª lei de Newton para descobrir a acelaração para descobrir a alteração na velocidade na simulação no eixo do y
+
 >>### CalculatePOS() -> Calculo da posição num instante de tempo
 >>Calcula a posiçao com base num tempo t. Utilizamos a formula do MRUV(movimento Retilíneo Uniformemente Variado) porque se a acelaraçao for equal a 0 ela fica equivalente a formula do MRU (Movimento Retilíneo Uniform)
 >>posição(tempo) = posicao no instante(0) + velocidade no instante (0) . tempo + 1/2.acelaração.t^2
