@@ -93,6 +93,7 @@ public class MainController
                         OutputView.InvalidSintax(parts);
                         return;
                     }
+                    OutputView.ExitSuccess();
                     Environment.Exit(0);
                     break;
                 case "Tests":

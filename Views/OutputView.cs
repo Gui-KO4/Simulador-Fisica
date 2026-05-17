@@ -26,6 +26,12 @@ public static class OutputView
             case "TG":
                 Console.WriteLine("Comando inválido: Sintaxe Correta: TG ON ou TG OFF");
                 break;
+            case "SMC":
+                Console.WriteLine("Comando inválido: Sintaxe Correta: SMC <DuracaoSimulacao> <PassoTemporal>");
+                break;
+            case "SMD":
+                Console.WriteLine("Comando inválido: Sintaxe Correta: SMD <NomeParticula> <DuracaoSimulacao> <PassoTemporal>");
+                break;
             case "Exit":
                 Console.WriteLine("Comando inválido: Sintaxe Correta: Exit");
                 break;
@@ -204,8 +210,8 @@ public static class OutputView
             Console.WriteLine($"Posição: ({px:F2}, {py:F2}) m | módulo = {PhysicEngine.GetMagnitude(px, py):F2} m | ângulo = {PhysicEngine.AngleInDegrees(px, py):F2} graus");
             Console.WriteLine($"Velocidade: ({vx:F2}, {vy:F2}) m/s | módulo = {PhysicEngine.GetMagnitude(vx, vy):F2} m/s | ângulo = {PhysicEngine.AngleInDegrees(vx, vy):F2} graus");
             Console.WriteLine($"Aceleração: ({ax:F2}, {ay:F2}) m/s^2 | módulo = {PhysicEngine.GetMagnitude(ax, ay):F2} m/s^2 | ângulo = {PhysicEngine.AngleInDegrees(ax, ay):F2} graus");
-            Console.WriteLine($"Distância percorrida: {distTotal:F2} m");
-            Console.WriteLine($"Distância percorrida no intervalo de tempo: {distIntervalo:F2} m");
+            Console.WriteLine($"Deslocamento no intervalo: {distTotal:F2} m");
+            Console.WriteLine($"Distância percorrida no intervalo: {distIntervalo:F2} m");
             Console.WriteLine("\n------------------------------------------------");
         }
     }
@@ -230,5 +236,8 @@ public static class OutputView
         return true;
     }
 
-
+    public static void ExitSuccess()
+    {
+        Console.WriteLine("Programa terminado com sucesso!");
+    }
 }
