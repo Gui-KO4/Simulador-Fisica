@@ -77,7 +77,7 @@ public class ProjectController
             OutputView.ToggleGravity(true, true);   
             ActiveProject.gravity = true;
         }else{
-        OutputView.InvalidSintax(parts);
+            OutputView.InvalidSintax(parts);
         }
     }
 

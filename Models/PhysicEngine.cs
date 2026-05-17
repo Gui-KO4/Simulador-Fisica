@@ -14,7 +14,7 @@ public static class PhysicEngine
 
         if (gravityActive) 
         {
-            fy -= (p.mass * 9.80); 
+            fy -= p.mass * 9.80; 
         }
 
         return new Force(fx, fy);
