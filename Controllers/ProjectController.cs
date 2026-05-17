@@ -22,7 +22,7 @@ public class ProjectController
             OutputView.ListProject(null, null);
             return;
         }
-
+        OutputView.ListProjectHeader();
         foreach (var project in projects)
         {
             OutputView.ListProject(project.Key, project.Value.currentState());
@@ -61,7 +61,7 @@ public class ProjectController
         
     }
     
-        public void ToggleGravity(string state)
+    public void ToggleGravity(string[] parts,string state)
     {
         if(ActiveProject == null)
         {
@@ -73,9 +73,12 @@ public class ProjectController
             OutputView.ToggleGravity(true, false);
             ActiveProject.gravity = false;
             return;
-        }
+        }else if(state == "ON"){
             OutputView.ToggleGravity(true, true);   
             ActiveProject.gravity = true;
+        }else{
+        OutputView.InvalidSintax(parts);
+        }
     }
 
     public Project GetActiveProject()

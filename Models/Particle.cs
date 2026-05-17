@@ -25,6 +25,6 @@ public class Particle
 
     public override string ToString()
     {
-        return $"Partícula: {name} \nPosição inicial: ({initialPositionX},{initialPositionY})m \nVelocidade inicial: ({initialVelocityX}{initialVelocityY}) m/s \nAcelaração: ({accelerationX}{accelerationY}) m/s^2 \nMassa: {mass} kg \nNúmero de forças aplicadas: {forces.Count()}";
+        return $"Identificador: {name} \nPosição inicial: ({initialPositionX}, {initialPositionY})m \nVelocidade inicial: ({initialVelocityX}, {initialVelocityY}) m/s \nAcelaração: ({accelerationX}, {accelerationY}) m/s^2 \nMassa: {mass} kg \nNúmero de forças aplicadas: {forces.Count()}";
     }
 }

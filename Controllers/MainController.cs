@@ -69,7 +69,7 @@ public class MainController
                         OutputView.InvalidSintax(parts);
                         return;
                     } 
-                    projectController.ToggleGravity(parts[1]);
+                    projectController.ToggleGravity(parts, parts[1]);
                     break;
                 case "SMC":
                     if(parts.Length != 3)
@@ -88,7 +88,13 @@ public class MainController
                     simulationController.SMD(parts[1], parts[2], parts[3]);
                     break;
                 case "Exit":
-                    return;
+                    if(parts.Length !=1)
+                    {
+                        OutputView.InvalidSintax(parts);
+                        return;
+                    }
+                    Environment.Exit(0);
+                    break;
                 case "Tests":
                     SimulationTests tests = new SimulationTests();
                     tests.RunAllTests();
