@@ -37,7 +37,7 @@ public class SimulationController
 
         if (!active.particles.ContainsKey(target))
         {
-            Console.WriteLine($"Particula {target} não encontrada.");
+            Console.WriteLine($"Particula {target} não se encontra registada no projeto atualmente ativo.");
             return;
         }
 
