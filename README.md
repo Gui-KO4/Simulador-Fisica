@@ -24,19 +24,19 @@
 >>posição(tempo) = posicao no instante(0) + velocidade no instante (0) . tempo + 1/2.acelaração.t^2
 >>Utilizamos esta formula para descobrir a posição da particula num intervalo de tempo nas simulações
 >
->>### CalculateVel -> Equação da velocidade
+>>### CalculateVel() -> Equação da velocidade
 >>Calcula da particula num instante de tempo
 >>velocidade(t) = velocidade no instante(0) + acelaração . t
 >>Determina como a velocidade varia ao longo do tempo nas simulações
 >
->>### GetMagnitude -> Obtem a magnitude
+>>### GetMagnitude() -> Obtem a magnitude
 >>|V| = raíz quadrada(X^2 + Y^2)
 >>
->>### AngleInDegrees -> Obtem o angulo em graus 
+>>### AngleInDegrees() -> Obtem o angulo em graus 
 >>0(teta) = arctan(y/x) . 180/pi
 >>GetMagnitude e AngleInDegrees sao usados para transformarmos as nossas componentes de cartesianas(X,Y) para cordenadas polares(módulo, ângulo)
 >
->>### Distance -> Obtem a deslocamento percorrido
+>>### Distance() -> Obtem a deslocamento percorrido
 >>Calcula todo o deslocamente feito pela particula
 >>distancia = raíz quadrada((X2 - X1)^2 + (Y2-Y1)^2)
 >>Usamos esta função para mostrar o deslocamento percorrido pela particula na simulação
@@ -44,4 +44,5 @@
 
 >## Caso de estudo
 >Para este caso de estudo vamos primeiro resolver um problema a lapis e caneta e depois verificar se os resultados batem certo no programa
->Este estudo de caso esta realizado no ficheiro ->
+>Este estudo de caso esta realizado no ficheiro -> estudoCasoFPA.docx
+
