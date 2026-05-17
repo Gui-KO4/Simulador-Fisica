@@ -80,7 +80,7 @@ public class SimulationTests
         Console.WriteLine("-------------------  Testes de Simulação-------------------");
         TestSMCSuccess();
         Console.WriteLine(" ");
-        TestSBD();
+        TestSetsBiggerThanDuration();
         Console.WriteLine(" ");
         TestNegativeTime();
         Console.WriteLine(" ");
@@ -185,9 +185,9 @@ public class SimulationTests
                 Console.WriteLine(" ");
                 TestSMCSuccess();
                 break;
-            case "TestSBD":
+            case "TestSetsBiggerThanDuration":
                 Console.WriteLine(" ");
-                TestSBD();
+                TestSetsBiggerThanDuration();
                 break;
             case "TestNegativeTime":
                 Console.WriteLine(" ");
@@ -446,16 +446,13 @@ public class SimulationTests
         SimulationController smcSimulationController = new SimulationController(smcProjectController);
         smcSimulationController.SMC("10", "5");
      
-        
-        Project project = smcProjectController.GetActiveProject();
-        Particle particle = project.particles["SMC1"];
         double posicaoFinalX = smcSimulationController.getLastPositionX();
         Console.WriteLine(posicaoFinalX);
 
         return Assert(posicaoInicial == posicaoFinalX);
     }
 
-    public bool TestSBD() // Steps bigger than Duration(SBD)
+    public bool TestSetsBiggerThanDuration()
     {
         ProjectController smcProjectController = new ProjectController();
         smcProjectController.RegisterProject("SMCProject");
@@ -499,10 +496,7 @@ public class SimulationTests
         
         SimulationController smdSimulationController = new SimulationController(smdProjectController);
         smdSimulationController.SMD("SMD1", "10","5");
-     
-        
-        Project project = smdProjectController.GetActiveProject();
-        Particle particle = project.particles["SMD1"];
+
         double posicaoFinalX = smdSimulationController.getLastPositionX();
         Console.WriteLine(posicaoFinalX);
 
