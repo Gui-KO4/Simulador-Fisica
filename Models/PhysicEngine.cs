@@ -1,4 +1,3 @@
-// Nos temos que colocar tudo relacionado a Matematica/Fisica aqui sem dar print (Aka sem usar texto).
 public static class PhysicEngine
 {
     public static Force GetResultantForce(Particle p, bool gravityActive)

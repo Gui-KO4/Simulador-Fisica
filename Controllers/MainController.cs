@@ -89,6 +89,10 @@ public class MainController
                     break;
                 case "Exit":
                     return;
+                case "Tests":
+                    SimulationTests tests = new SimulationTests();
+                    tests.RunAllTests();
+                    break;
                 default:     
                     OutputView.InvalidSintax(parts); 
                     break;

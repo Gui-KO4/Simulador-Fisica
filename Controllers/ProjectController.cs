@@ -1,8 +1,3 @@
-//Relacionado aos comandos:
-//RPJ
-//LPJ
-//SPJ
-
 public class ProjectController
 {
     Dictionary<string, Project> projects = new Dictionary<string, Project>();
@@ -86,5 +81,14 @@ public class ProjectController
     public Project GetActiveProject()
     {
         return ActiveProject;
+    }
+
+    public Project GetProject(string name)
+    {
+        if (projects.ContainsKey(name))
+        {
+            return projects[name];
+        }
+        return null;
     }
 }
