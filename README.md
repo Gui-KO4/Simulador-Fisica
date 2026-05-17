@@ -44,4 +44,17 @@
 
 >## Caso de estudo
 >Para este caso de estudo vamos primeiro resolver um problema a lapis e caneta e depois verificar se os resultados batem certo no programa
->Este estudo de caso esta realizado no ficheiro ->
+>Este estudo de caso esta realizado no ficheiro -> 
+
+>## Testes Unitarios
+>>Para os testes unitarios fizemos uma abordagem diferente, em vez de usar um Library de testes como o NUnit ou xUnit, optamos por criar as nossas proprias funções para testar a funcionalidade do programa. Pois quando testamos usar as libraries mencionadas, tivemos problemas com a execução dos testes, além de adicionar a necessidade de instalar os packages e configurar o ambiente de testes, o que poderia ser um problema para a professora correr os testes.
+>>>### Como correr os testes
+>>>Correr o Programa normalmente, e como comando usar "Test" para correr todos os testes ou "Test [Nome do Teste]" para correr um teste específico.
+>>>O Nome do teste é o nome do metodo de teste.
+>>>>Nota: Tentamos manter os nomes dos metodos de teste o mais descritivo possível para facilitar a identificação e o que fazem.
+
+>## Motivo de escolha de tipo de variaveis
+>> - Usamos doubles para as variaveis numericas, pois permite o uso de casas decimais e é mais preciso para os calculos de fisica, onde a precisão é importante.
+>> - Nos usamos um Dictionary para armazenar os projetos, pois permite o acesso rapido sem ter de iterar por uma lista, podendo acessar o projeto que queremos por um nome unico que é a chave.
+>> - Usamos um OrderedDictionary para armazenar as particulas, pois é mais eficiente para acessar as particulas diretamente por um nome em vez de iterar por uma lista, por ser um OrderedDictionary, ele organiza os elementos Alfabeticamente como pedido no enunciado.
+>> - Para as forças usamos uma List, pois nos não vimos necessidade de acessar as forças individualmente, pois as forças são usadas em conjunto.
