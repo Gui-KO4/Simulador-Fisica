@@ -36,7 +36,7 @@ public class SimulationTests
         particleController.RegisterForce("P1", "0", "10");
         particleController.RegisterForce("P1", "-5", "0");
         particleController.RegisterForce("P1", "0", "-5");
-        particleController.ToggleGravity("ON");
+       projectController.ToggleGravity("ON");
     }
 
     private void FailedTest()
