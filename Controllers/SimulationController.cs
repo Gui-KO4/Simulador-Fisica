@@ -11,44 +11,44 @@ public class SimulationController
     public void SMC(string durationStr, string stepStr)
     {
         Project active = this.projectController.GetActiveProject();
-        if (!OutputView.ValidateTime(active, durationStr, stepStr, out double duration, out double step))
+        double duration = Convert.ToDouble(durationStr);
+        double step = Convert.ToDouble(stepStr);
+        if (!OutputView.ValidateTime(active, duration, step))
         {
             return;
         }
-
-        if (active.particles.Count == 0) {
-            Console.WriteLine("Nenhuma partícula registada.");
-            return;
+        // Realiza todas as validações centralizadas no OutputView
+        if (!OutputView.SimulationCinematic(active))
+        {
+            return; 
         }
-
-        Console.WriteLine("Simulação cinemática iniciada.");
         Simulation(active, null, duration, step, true);
-        Console.WriteLine("Simulação cinemática concluída.");
+        OutputView.SimulationFim();
+       
     }
 
     // Executa a Simulação Dinâmica (SMD) - Apenas uma partícula alvo
     public void SMD(string target, string durationStr, string stepStr)
     {
         Project active = this.projectController.GetActiveProject();
-        if (!OutputView.ValidateTime(active, durationStr, stepStr, out double duration, out double step))
+        double duration = Convert.ToDouble(durationStr);
+        double step = Convert.ToDouble(stepStr);
+        if (!OutputView.ValidateTime(active, duration, step))
         {
             return;
         }
 
-        if (!active.particles.ContainsKey(target))
+        if (!OutputView.SimulationDynamic(active, target))
         {
-            Console.WriteLine($"Particula {target} não se encontra registada no projeto atualmente ativo.");
             return;
         }
-
-        Console.WriteLine("Simulação dinâmica iniciada.");
         Simulation(active, target, duration, step, false);
-        Console.WriteLine("Simulação dinâmica concluída.");
+        OutputView.SimulationFim(target);
     }
 
     private void Simulation(Project proj, string target, double duration, double step, bool isKinematic)
         {
-            int iteracoes = (int)Math.Floor(duration / step);
+            int iteracoes = Convert.ToInt32(duration / step);
             // Utiliza OutputView em vez de SimulationView
             OutputView.SimulationSummary(duration, step, iteracoes, target);
 
@@ -62,13 +62,26 @@ public class SimulationController
 
                 
                     Force fRes = PhysicEngine.GetResultantForce(particle, proj.gravity);
-                    var accDasForcas = PhysicEngine.GetAcceleration(fRes, particle.mass);
 
-                    double accFinalX = particle.accelerationX + accDasForcas.x;
-                    double accFinalY = particle.accelerationY + accDasForcas.y;
+                    double accDasForcasX = PhysicEngine.GetAccelerationX(fRes, particle.mass);
+                    double accDasForcasY = PhysicEngine.GetAccelerationY(fRes, particle.mass);
+                    var accDasForcas = new Force(accDasForcasX, accDasForcasY);
 
-                    double accMostrarX = (t == 0) ? particle.accelerationX : accFinalX;
-                    double accMostrarY = (t == 0) ? particle.accelerationY : accFinalY;
+                    double accFinalX = particle.accelerationX + accDasForcasX;
+                    double accFinalY = particle.accelerationY + accDasForcasY;
+
+                    double accMostrarX, accMostrarY;
+
+                    if (t == 0)
+                    {
+                        accMostrarX = particle.accelerationX;
+                        accMostrarY = particle.accelerationY;
+                    }
+                    else
+                    {
+                        accMostrarX = accFinalX;
+                        accMostrarY = accFinalY;
+                    }
 
                     double posx = PhysicEngine.CalculatePos(particle.initialPositionX, particle.initialVelocityX, accFinalX, t);
                     double posy = PhysicEngine.CalculatePos(particle.initialPositionY, particle.initialVelocityY, accFinalY, t);

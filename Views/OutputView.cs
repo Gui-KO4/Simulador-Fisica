@@ -176,6 +176,14 @@ public static class OutputView
 
         public static void SimulationSummary(double duration, double step, int iterations, string target = null)
     {
+        if (target == null) 
+        {
+            Console.WriteLine("Simulação cinemática iniciada.");
+        }
+        else
+        {
+            Console.WriteLine("Simulação dinâmica iniciada.");
+        }
         Console.WriteLine($"Tempo total: {duration:F2}s");
         Console.WriteLine($"Passo: {step:F2}s");
         Console.WriteLine($"Número de iterações: {iterations}");
@@ -215,26 +223,75 @@ public static class OutputView
             Console.WriteLine("\n------------------------------------------------");
         }
     }
-
-    public static bool ValidateTime(Project proj, string dStr, string sStr, out double d, out double s)
+    public static void SimulationFim(string target = null)
     {
-        d = s = 0;
+        if (target == null) 
+        {
+            Console.WriteLine("Simulação cinemática concluída.");
+        }
+        else
+        {
+            Console.WriteLine("\nSimulação dinâmica concluída.");
+        }
+    }
+    
+
+    public static bool ValidateTime(Project proj, double duration, double step)
+    {
         if (proj == null) 
         { 
-            Console.WriteLine("Nenhum projeto selecionado."); return false;
-        }
-        if (!double.TryParse(dStr, out d) || !double.TryParse(sStr, out s) || d <= 0 || s <= 0) 
-        {
-            Console.WriteLine("O valor da duração da simulação ou do passo temporal inválido.");
+            Console.WriteLine("Nenhum projeto selecionado."); 
             return false;
         }
-        if (s > d) 
+        if (duration <= 0 || step <= 0) 
         {
-            Console.WriteLine("Passo invalido. O passo não pode ser superior ao tempo total.");
+            Console.WriteLine("Os valores devem ser superiores a zero.");
+            return false;
+        }
+        if (step > duration) 
+        {
+            Console.WriteLine("O passo não pode ser superior ao tempo total.");
             return false;
         }
         return true;
     }
+    public static bool SimulationCinematic(Project proj)
+    {
+        if (proj == null) 
+        { 
+            Console.WriteLine("Nenhum projeto selecionado."); 
+            return false;
+        }
+
+        if (proj.particles.Count == 0)
+        {
+            Console.WriteLine("Nenhuma partícula registada.");
+            return false;
+        }
+        return true;
+    }
+    public static bool SimulationDynamic(Project proj, string target)
+    {
+        if (proj == null) 
+        { 
+            Console.WriteLine("Nenhum projeto selecionado."); 
+            return false;
+        }
+        
+        if (!proj.particles.ContainsKey(target))
+        {
+            Console.WriteLine($"Partícula {target} não se encontra registada no projeto atualmente ativo.");
+            return false;
+        }
+
+        if (proj.particles.Count == 0)
+        {
+            Console.WriteLine("Nenhuma partícula registada.");
+            return false;
+        }
+        return true;
+    }
+    
 
     public static void ExitSuccess()
     {
