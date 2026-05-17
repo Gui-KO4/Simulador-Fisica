@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Diagnostics; // Possivel Library para implementar a medição de tempo de execução dos testes.
 
 public class SimulationTests
@@ -48,6 +49,13 @@ public class SimulationTests
         TestSelectProjectAlreadySelected();
         Console.WriteLine(" ");
         TestSelectProjectNotFound();
+        Console.WriteLine(" ");
+        TestToggleGravityON();
+        Console.WriteLine(" ");
+        TestToggleGravityOFF();
+        Console.WriteLine(" ");
+        TestToggleGravityInvalidComand();
+
         
 
         Console.WriteLine("-------------------  Testes de Particula-------------------");
@@ -66,8 +74,12 @@ public class SimulationTests
         TestRegisterForceSucess();
         Console.WriteLine(" ");
         TestRegisterForceInvalidValues();
-        Console.WriteLine("-------------------  Testes de Simulação-------------------");
 
+
+
+        Console.WriteLine("-------------------  Testes de Simulação-------------------");
+        TestSMCSuccess();
+        Console.WriteLine(" ");
 
 
         // Força um Teste a falhar (Para demonstrar que o Metodo de Assert funciona corretamente)
@@ -118,6 +130,18 @@ public class SimulationTests
                 Console.WriteLine(" ");
                 TestSelectProjectNotFound();
                 break;
+            case "TestToggleGravityON":
+                Console.WriteLine(" ");
+                TestToggleGravityON();
+                break;
+            case "TestToggleGravityOFF":
+                Console.WriteLine(" ");
+                TestToggleGravityOFF();
+                break;
+            case "TestToggleGravityInvalidCommand":
+                Console.WriteLine(" ");
+                TestToggleGravityInvalidComand();
+                break;
             case "TestRegisterParticleSuccess":
                 Console.WriteLine(" ");
                 TestRegisterParticleSuccess();
@@ -149,6 +173,10 @@ public class SimulationTests
             case "TestRegisterForceInvalidValues":
                 Console.WriteLine(" ");
                 TestRegisterForceInvalidValues();
+                break;
+            case "TestSMCSuccess":
+                Console.WriteLine(" ");
+                TestSMCSuccess();
                 break;
             case "TestForceFailedAssert":
                 Console.WriteLine(" ");
@@ -231,6 +259,46 @@ public class SimulationTests
         ProjectController sPNotFound = new ProjectController();
         sPNotFound.SelectProject("Project2");
         return Assert(sPNotFound.GetActiveProject() == null);
+    }
+
+    public bool TestToggleGravityON()
+    {
+        ProjectController projectController = new ProjectController();
+        projectController.RegisterProject("GravityProject");
+        projectController.SelectProject("GravityProject");
+
+        projectController.GetActiveProject().gravity = false;
+
+        string[] partsComando = {"TG", "ON"};
+        projectController.ToggleGravity(partsComando, "ON");
+
+        return Assert(projectController.GetActiveProject().gravity == true);
+    }
+
+    public bool TestToggleGravityOFF()
+    {
+        ProjectController projectController = new ProjectController();
+        projectController.RegisterProject("GravityProject2");
+        projectController.SelectProject("GravityProject2");
+        projectController.GetActiveProject().gravity = true;
+
+        string[] partsCommand = {"TG", "OFF"};
+        projectController.ToggleGravity(partsCommand, "OFF");
+
+        return Assert(projectController.GetActiveProject().gravity == false);
+    }
+
+    public bool TestToggleGravityInvalidComand()
+    {
+        ProjectController projectController = new ProjectController();
+        projectController.RegisterProject("GravityProject3");
+        projectController.SelectProject("GravityProject3");
+        bool previousState = projectController.GetActiveProject().gravity;
+
+        string[] partsErrorCommand = {"TG", "Uhhh"};
+        projectController.ToggleGravity(partsErrorCommand, "Uhhh");
+ 
+        return Assert(projectController.GetActiveProject().gravity == previousState);
     }
 
     // Tests Particle Controller
@@ -340,5 +408,53 @@ public class SimulationTests
 
     // Tests of Simulation Controller
 
+    public bool TestSMCSuccess()
+    {
+        ProjectController smcProjectController = new ProjectController();
+        smcProjectController.RegisterProject("SMCProject");
+        smcProjectController.SelectProject("SMCProject");
 
+        ParticleController smcParticleController = new ParticleController(smcProjectController);
+        smcParticleController.RegisterParticle("SMC1", "20", "20", "0", "0", "0", "0", "10");
+
+        double posicaoInicial = smcProjectController.GetActiveProject().particles["SMC1"].initialPositionX;
+        Console.WriteLine(posicaoInicial);
+        
+        SimulationController smcSimulationController = new SimulationController(smcProjectController);
+        smcSimulationController.SMC("10", "5");
+
+        double posicaoFinal = smcProjectController.GetActiveProject().particles["SMC1"].initialPositionX;
+        Console.WriteLine(posicaoFinal);
+
+        return Assert(posicaoInicial == posicaoFinal);
+    }
+
+/*
+    public bool TestSMCInvalidTime()
+    {
+        ProjectController smcProjectControllerIT = new ProjectController();
+        smcProjectControllerIT.RegisterProject("SMCIT");
+        smcProjectControllerIT.SelectProject("SMCIT");
+
+        ParticleController smcParticleControllerIT = new ParticleController(smcProjectControllerIT);
+        smcParticleControllerIT.RegisterParticle("SMCIT", "0", "0", "20", "0", "0", "0", "10");
+
+        double posicaoInicial = smcProjectControllerIT.GetActiveProject().particles["SMCIT"].initialPositionX;
+
+        SimulationController smcSimulationControllerIT = new SimulationController(smcProjectControllerIT);
+
+        
+    }
+/*
+    public bool TestSMDSuccess()
+    {
+        
+    }
+
+    public bool TestValidationTime()
+    {
+        
+    }
+
+*/
 }
