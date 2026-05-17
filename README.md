@@ -40,3 +40,8 @@
 >>Calcula todo o deslocamente feito pela particula
 >>distancia = raíz quadrada((X2 - X1)^2 + (Y2-Y1)^2)
 >>Usamos esta função para mostrar o deslocamento percorrido pela particula na simulação
+>>
+
+>## Caso de estudo
+>Para este caso de estudo vamos primeiro resolver um problema a lapis e caneta e depois verificar se os resultados batem certo no programa
+>Este estudo de caso esta realizado no ficheiro ->
