@@ -96,9 +96,21 @@ public class MainController
                     OutputView.ExitSuccess();
                     Environment.Exit(0);
                     break;
-                case "Tests":
-                    SimulationTests tests = new SimulationTests();
-                    tests.RunAllTests();
+                case "Test":
+                    if(parts.Length > 2)
+                    {
+                        return;
+                    }
+                    else if(parts.Length == 1)
+                    {
+                        SimulationTests simulationTests = new SimulationTests();
+                        simulationTests.RunAllTests();
+                    }
+                    else if(parts.Length == 2)
+                    {
+                        SimulationTests simulationTests = new SimulationTests();
+                        simulationTests.RunEspecificTest(parts[1]);
+                    }
                     break;
                 default:     
                     OutputView.InvalidSintax(parts); 

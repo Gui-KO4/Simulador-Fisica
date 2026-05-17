@@ -83,6 +83,92 @@ public class SimulationTests
 
     }
 
+    public void RunEspecificTest(string testName)
+    {
+        failedTests = 0;
+        passedTests = 0;
+        
+        switch (testName)
+        {
+            case "TestRegisterProjectSuccess":
+                Console.WriteLine(" ");
+                TestRegisterProjectSuccess();
+                break;
+            case "TestRegisterProjectAlreadyExists":
+                Console.WriteLine(" ");
+                TestRegisterProjectAlreadyExists();
+                break;
+            case "TestListProjects":
+                Console.WriteLine(" ");
+                TestListProjects();
+                break;
+            case "TestListProjectsEmpty":
+                Console.WriteLine(" ");
+                TestListProjectsEmpty();
+                break;
+            case "TestSelectProjectSelectnNewProject":
+                Console.WriteLine(" ");
+                TestSelectProjectSelectnNewProject();
+                break;
+            case "TestSelectProjectAlreadySelected":
+                Console.WriteLine(" ");
+                TestSelectProjectAlreadySelected();
+                break;
+            case "TestSelectProjectNotFound":
+                Console.WriteLine(" ");
+                TestSelectProjectNotFound();
+                break;
+            case "TestRegisterParticleSuccess":
+                Console.WriteLine(" ");
+                TestRegisterParticleSuccess();
+                break;
+            case "TestRegisterParticleMassInvalid":
+                Console.WriteLine(" ");
+                TestRegisterParticleMassInvalid();
+                break;
+            case "TestRegisterParticleInvalidValues":
+                Console.WriteLine(" ");
+                TestRegisterParticleInvalidValues();
+                break;
+            case "TestRegisterParticleAlreadyExists":
+                Console.WriteLine(" ");
+                TestRegisterParticleAlreadyExists();
+                break;
+            case "TestListParticlesSuceful":
+                Console.WriteLine(" ");
+                TestListParticlesSuceful();
+                break;
+            case "TestListParticlesEmpty":
+                Console.WriteLine(" ");
+                TestListParticlesEmpty();
+                break;
+            case "TestRegisterForceSucess":
+                Console.WriteLine(" ");
+                TestRegisterForceSucess();
+                break;
+            case "TestRegisterForceInvalidValues":
+                Console.WriteLine(" ");
+                TestRegisterForceInvalidValues();
+                break;
+            case "TestForceFailedAssert":
+                Console.WriteLine(" ");
+                TestForceFailedAssert();
+                break;
+            default:
+                Console.WriteLine("Teste não encontrado.");
+                break;
+        }
+
+        if (failedTests > 0)
+        {
+            Console.WriteLine($"\nTeste {testName} falhou.");
+        }
+        else
+        {
+            Console.WriteLine($"\nTeste {testName} passou com sucesso.");
+        }
+    }
+
     // Tests of Project Controller
 
     public bool TestRegisterProjectSuccess()
