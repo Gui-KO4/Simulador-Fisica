@@ -83,6 +83,7 @@ public class ProjectController
         return ActiveProject;
     }
 
+    // Helper Methods for Tests
     public Project GetProject(string name)
     {
         if (projects.ContainsKey(name))
@@ -91,4 +92,10 @@ public class ProjectController
         }
         return null;
     }
+
+    public int GetTotalProjects()
+    {
+        return projects.Count;
+    }
+
 }
